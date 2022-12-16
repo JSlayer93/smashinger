@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shmashinger</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="UserSec" id="userSec">
+        <div class="searchDiv">
+            <input class="UserSearch" type="text" >
+        </div>
+        <div class="FriendsDiv" id="Friends_Div">
+            <img src="img/loading.gif" class="userLoadGif" id="userLoadGif" alt="">
+            <!-- <nav class="FriendProfile">
+                <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
+                <p>Adolf hitler</p>
+            </nav> -->
+            <img class="User_more no_visible" id="User_more" src="img/more.png" alt="">
+        </div>
+    </section>
+    <section class="MsgSec" id="MsgSec">
+        <div class="ChatName">
+            <img class="friendIcon" id="friendsIcon" src="img/firedns.png" alt="">
+            <nav class="Header">
+                <img class="no_visible" src="data:image/jpeg;base64,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" alt="">
+                <p class="no_visible" id="HeaderName"></p>
+            </nav>
+            <img id="profileIcon" class="profileIcon no_visible" src="img/profile.png" alt="">
+            <img id="regIcon" class="profileIcon" src="img/user.png">
+        </div>
+        <div class="MsgDiv">
+            <img src="img/loading.gif" class="MSGLoadGif no_visible" id="MSGLoadGif" alt="">
+            <nav class="MsgMenu" id="msgMenu">
+                <form class="MsgForm">
+                    <input class="MsgText" autocomplete="off" id="msgText" type="text">
+                    <input type="submit" class="msgSubmit" value="Send">
+                </form>
+            </nav>
+            <nav class="MsgNav" id="msg_main_div">
+                <!-- <p class="Msg_Me">hello hitler</p>
+                <p class="Msg_Me">hello hitler</p>
+                <p class="Msg_Me">hello hitler</p> -->
+                <nav class="Nav_Other_Msg" id="other_msg_div">
+                    <!-- <p class="Msg_Other">hello hitler</p>
+                    <p class="Msg_Other">hello hitler</p> -->
+                </nav>
+            </nav>
+        </div>
+    </section>
+    <section class="profileSec no_visible" id="profile_menu">
+        <div class="profile_pic">
+            <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
+            <p id="ProfileName" ></p>
+            <button class="profile_close" id="profile_close">close</button>
+        </div>
+        <div class="friend_count">
+            <p>Friends:  you dont have any</p>
+        </div>
+        <div class="log_out">
+            <button id="log_out_btn">
+                log out
+            </button>
+        </div>
+    </section>
+    <div id="log-in-or-reg" class="log-in no_visible">
+        <input id="Reg_name" autocomplete="off" style="text-transform: lowercase" type="text">
+        <input id="Reg_password" autocomplete="off" style="text-transform: lowercase" type="password">
+        <button id="reg_btn" autocomplete="off" style="background-color: rgb(8, 201, 8);">Sign up</button>
+        <button id="log_btn" autocomplete="off" style="background-color: blue;">Log in</button>
+    </div>
+    <script type="module" src="./js_front/index.js"></script>
+</body>
+</html>
