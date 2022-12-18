@@ -13,6 +13,8 @@ socket.on("connect", () => {
     console.log("server is connected")
 })
 
+Notification.requestPermission()
+
 if(localStorage.getItem("Registered")){
     renderProfile(localStorage.getItem("name"))
 }
