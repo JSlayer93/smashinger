@@ -43,13 +43,12 @@ Usercount()
 var oldname = ""
 
 addEventListener("click", e => {
-    if(localStorage.getItem("Registered")){
-        if(e.path[1].className == "FriendProfile"){
-            openMsgBar(e.path[1].childNodes[3].innerText, oldname)
-            oldname = e.path[1].childNodes[3].innerText
-        }else if(e.path[0].className == "FriendProfile"){
-            openMsgBar(e.path[0].innerText, oldname)
-            oldname = e.path[0].innerText
+    if (localStorage.getItem("Registered")) {
+        const target = e.composedPath().find(node => node.classList.contains("FriendProfile"));
+        if (target) {
+          const friendName = target.textContent.trim();
+          openMsgBar(friendName, oldname);
+          oldname = friendName;
         }
     }
 })
