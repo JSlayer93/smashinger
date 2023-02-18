@@ -55,6 +55,7 @@ reciveMsg()
 //FRIENDSC
 Usercount()
 
+<<<<<<< HEAD
 window.onhashchange = function() {
     if (window.location.hash) {
       const hashWithoutSymbol = window.location.hash.slice(1);
@@ -62,6 +63,18 @@ window.onhashchange = function() {
       oldId = hashWithoutSymbol
     } else {
       console.log("No hash fragment found");
+=======
+var oldname = ""
+
+addEventListener("click", e => {
+    if (localStorage.getItem("Registered")) {
+        const target = e.composedPath().find(node => node.classList.contains("FriendProfile"));
+        if (target) {
+          const friendName = target.textContent.trim();
+          openMsgBar(friendName, oldname);
+          oldname = friendName;
+        }
+>>>>>>> origin/main
     }
 };
 
