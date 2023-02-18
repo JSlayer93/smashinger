@@ -8,7 +8,7 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
 import { reciveMsg } from "./massages/recivemsg.js"
 import { sendMsg } from "./massages/sendMsg.js"
 
-export const socket = io("http://127.0.0.1:3000")
+export const socket = io("https://smash-api1.herokuapp.com")
 socket.on("connect", () => {
     console.log("server is connected")
 })
