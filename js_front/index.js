@@ -1,7 +1,7 @@
 import { elements } from "./elements/elements.js"
 import { alreadyIn, closeProfile, log_out, renderProfile, showProfile } from "./profile/profile.js"
 import { register } from "./get_in/registration.js"
-import { closeOpenFriends, createUser, Usercount } from "./friends/friends.js"
+import { closeOpenFriends, createNewUser, createUser, Usercount } from "./friends/friends.js"
 import { log_in } from "./get_in/Log_in.js"
 import { createMainMsg, createOtherMsg, openMsgBar } from "./massages/openMsg.js"
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
@@ -13,8 +13,25 @@ socket.on("connect", () => {
     console.log("server is connected")
 })
 
+Notification.requestPermission()
+
 if(localStorage.getItem("Registered")){
-    renderProfile(localStorage.getItem("name"))
+    renderProfile(localStorage.getItem(`id`))
+}
+
+createNewUser()
+
+let currentUrl = window.location.href;
+
+let hashFragment = currentUrl.split("#")[1];
+
+let oldId = ``
+
+if (hashFragment) {
+  openMsgBar(hashFragment, oldId)
+  oldId = hashFragment
+} else {
+  console.log("No hash fragment found");
 }
 
 if(location.reload){
@@ -22,12 +39,12 @@ if(location.reload){
 }
 
 if(localStorage.getItem("Registered")){
-    socket.emit("join_name_room", localStorage.getItem("name"))
+    socket.emit("join_id_room", localStorage.getItem("id"))
 }
 
 elements.msgMenu.addEventListener("submit", function(){
     event.preventDefault()
-    if(msgText.value != "" && localStorage.getItem("Msgname")){
+    if(msgText.value != "" && localStorage.getItem("Msgid")){
         sendMsg(msgText.value)
         msgText.value = ""
     }
@@ -38,21 +55,15 @@ reciveMsg()
 //FRIENDSC
 Usercount()
 
-var oldname = ""
-
-addEventListener("click", e => {
-    if(localStorage.getItem("Registered")){
-        if(e.path[1].className == "FriendProfile"){
-            openMsgBar(e.path[1].childNodes[3].innerText, oldname)
-            oldname = e.path[1].childNodes[3].innerText
-        }else if(e.path[0].className == "FriendProfile"){
-            openMsgBar(e.path[0].innerText, oldname)
-            oldname = e.path[0].innerText
-        }
+window.onhashchange = function() {
+    if (window.location.hash) {
+      const hashWithoutSymbol = window.location.hash.slice(1);
+      openMsgBar(hashWithoutSymbol, oldId)
+      oldId = hashWithoutSymbol
+    } else {
+      console.log("No hash fragment found");
     }
-})
-
-
+};
 
 elements.regIcon.addEventListener("click", function(){
     elements.log_in_or_reg.classList.remove("no_visible")

@@ -17,14 +17,14 @@ export const closeProfile = () =>{
 
 export const log_out = () =>{
     localStorage.removeItem("Registered")
-    localStorage.removeItem("name")
+    localStorage.removeItem("id")
     location.reload()
 }
 
-export const renderProfile = async (name) =>{
-    const data = await fetch(`https://smash-api1.herokuapp.com/user?name=${name}`, {
+export const renderProfile = async (id) =>{
+    const data = await fetch(`https://smash-api1.herokuapp.com/user?id=${id}`, {
             method: "GET"
         }).catch(err => {console.log(err)})
-        const returnData = await data.json()
-        elements.ProfileName.innerHTML = returnData.msg[0].name
+    const returnData = await data.json()
+    elements.ProfileName.innerHTML = returnData.msg.name
 }

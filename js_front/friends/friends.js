@@ -1,4 +1,5 @@
 import { elements } from "../elements/elements.js";
+import { socket } from "../index.js";
 
 var Opener = false
 var ConuntIndex = 0
@@ -9,14 +10,17 @@ export const createUser = async (justZ, count) => {
             method: "GET"
         }).catch(err => {console.log(err)})
         const returnData = await data.json()
-        var name = returnData.msg2[justZ].name
+        let name = returnData.msg2[justZ].name
+        let id = returnData.msg2[justZ]._id
         
-        if(name != localStorage.getItem("name")){
+        if(id != localStorage.getItem("id")){
             const User = `
-            <nav class="FriendProfile">
-                <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
-                <p>${name}</p>
-            </nav>`
+            <a class="FriendProfile_A" id="FriendProfile" href="#${id}">
+                <nav class="FriendProfile">
+                    <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
+                    <p>${name}</p>
+                </nav>
+            </a>`
             elements.friendsDiv.insertAdjacentHTML('beforeend', User)
         }
         justZ = justZ + 1
@@ -66,4 +70,17 @@ export const closeOpenFriends = () =>{
             elements.userSec.style.transition = "0.3s"
         }
     }
+}
+
+export const createNewUser = () => {
+    socket.on("createIsReal", name => {
+        const User = `
+        <a class="FriendProfile_A" href="sdad">
+        <nav class="FriendProfile">
+            <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
+            <p>${name}</p>
+        </nav>
+    </a>`
+        elements.friendsDiv.insertAdjacentHTML('beforeend', User)
+    })
 }

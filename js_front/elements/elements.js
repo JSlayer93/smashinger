@@ -28,5 +28,6 @@ export const elements = {
     // USERS
     friendsDiv: document.getElementById("Friends_Div"),
     add_more: document.getElementById("User_more"),
-    userLoadGif: document.getElementById('userLoadGif')
+    userLoadGif: document.getElementById('userLoadGif'),
+    FriendProfile: document.getElementById(`FriendProfile`),
 }

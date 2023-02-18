@@ -1,16 +1,15 @@
 import { elements } from "../elements/elements.js";
 import { socket } from "../index.js";
 
-export const openMsgBar = (name, oldname) => {
-    if(name != oldname){
+export const openMsgBar = (id, oldId) => {
+    if(id != oldId){
         elements.MSGLoadGif.classList.remove("no_visible")
         removeMsgH()
-        renderMSG(localStorage.getItem("name"), name)
+        renderMSG(localStorage.getItem("id"), id)
     }
-    elements.HeaderName.innerText = name
-    elements.HeaderName.classList.remove("no_visible")
-    socket.emit("openMsgBar", name, oldname, localStorage.getItem("name"))
-    localStorage.setItem(`Msgname`, name)
+    renderName(id)
+    socket.emit("openMsgBar", id, oldId, localStorage.getItem("id"))
+    localStorage.setItem(`Msgid`, id)
 }
 
 
@@ -20,13 +19,22 @@ export const removeMsgH = () => {
     }
 }
 
-export const renderMSG = async (name, recivename) => {
-    const data = await fetch(`https://smash-api1.herokuapp.com/MSG?sender=${name}&reciver=${recivename}`, {
+const renderName = async (id) => {
+    const data = await fetch(`https://smash-api1.herokuapp.com/user?id=${id}`, {
+        method: "GET"
+    }).catch(err => {console.log(err)})
+    const returnData = await data.json()
+    elements.HeaderName.classList.remove("no_visible")
+    elements.HeaderName.innerText = returnData.msg.name
+}
+
+export const renderMSG = async (id, reciveId) => {
+    const data = await fetch(`https://smash-api1.herokuapp.com/MSG?sender=${id}&reciver=${reciveId}`, {
         method: "GET"
     }).catch(err => {console.log(err)})
     const returnData = await data.json()
     for(var i = 0; i < returnData.msg.length; i++){
-        if(localStorage.getItem("name") == returnData.msg[i].reciver){
+        if(localStorage.getItem("id") == returnData.msg[i].reciver){
             createOtherMsg(returnData.msg[i].content)
         }else{
             createMainMsg(returnData.msg[i].content)

@@ -9,8 +9,9 @@ export const log_in = async() =>{
     }).catch(err => {console.log(err)})
     const returnData = await data.json()
     console.log(returnData.msg)
-    if(returnData.msg == "OK"){
-        regSucces()
+    if(returnData.msg){
+        regSucces(returnData.msg)
+        location.reload()
     }else{
         alert("პაპს ნუ ატყუებ")
     }

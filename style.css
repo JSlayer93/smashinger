@@ -78,7 +78,6 @@
     cursor: pointer;
     border-radius: 25vh;
     margin-top: 2.5vh;
-    width: 90%;
     background-color: white;
     height: 12vh;
     display: flex;
@@ -96,6 +95,11 @@
     margin-right: 3vh;
     height: 10vh;
     border-radius: 75vh;
+}
+.FriendProfile_A{
+    text-decoration: none;
+    color: black;
+    width: 90%;
 }
 
 /* MSGSEC */
@@ -134,7 +138,7 @@
     padding: 1vh;
     border-radius: 25vh;
     width: 8vh;
-    background-color: blue;
+    background-color: white;
     transition: 0.3s;
 }
 .profileIcon{
@@ -148,7 +152,7 @@
     padding: 1vh;
     border-radius: 25vh;
     width: 8vh;
-    background-color: blue;
+    background-color: white;
     transition: 0.3s;
 }
 .Header{
