@@ -8,7 +8,7 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
 import { reciveMsg } from "./massages/recivemsg.js"
 import { sendMsg } from "./massages/sendMsg.js"
 
-export const socket = io("https://smash-api1.herokuapp.com")
+export const socket = io("http://127.0.0.1:3000")
 socket.on("connect", () => {
     console.log("server is connected")
 })
@@ -55,7 +55,6 @@ reciveMsg()
 //FRIENDSC
 Usercount()
 
-<<<<<<< HEAD
 window.onhashchange = function() {
     if (window.location.hash) {
       const hashWithoutSymbol = window.location.hash.slice(1);
@@ -63,18 +62,6 @@ window.onhashchange = function() {
       oldId = hashWithoutSymbol
     } else {
       console.log("No hash fragment found");
-=======
-var oldname = ""
-
-addEventListener("click", e => {
-    if (localStorage.getItem("Registered")) {
-        const target = e.composedPath().find(node => node.classList.contains("FriendProfile"));
-        if (target) {
-          const friendName = target.textContent.trim();
-          openMsgBar(friendName, oldname);
-          oldname = friendName;
-        }
->>>>>>> origin/main
     }
 };
 
