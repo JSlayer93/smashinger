@@ -46,8 +46,6 @@ reciveMsg()
 //FRIENDSC
 Usercount()
 
-var oldname = ""
-
 window.onhashchange = function() {
   if (window.location.hash && localStorage.getItem(`Registered`) && localStorage.getItem(`Registered`) && localStorage.getItem(`id`) != window.location.hash.slice(1)) {
     const hashWithoutSymbol = window.location.hash.slice(1);
