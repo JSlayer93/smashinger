@@ -11,7 +11,6 @@ export const log_in = async() =>{
     console.log(returnData.msg)
     if(returnData.msg){
         regSucces(returnData.msg)
-        location.reload()
     }else{
         alert("პაპს ნუ ატყუებ")
     }
