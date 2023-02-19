@@ -1,6 +1,8 @@
 import { elements } from "../elements/elements.js";
 import { socket } from "../index.js";
 
+export const openMsgBar = (id, oldid) => {
+    if(id != oldid){
 export const openMsgBar = (id, oldId) => {
     if(id != oldId){
         elements.MSGLoadGif.classList.remove("no_visible")
@@ -8,10 +10,21 @@ export const openMsgBar = (id, oldId) => {
         renderMSG(localStorage.getItem("id"), id)
     }
     renderName(id)
-    socket.emit("openMsgBar", id, oldId, localStorage.getItem("id"))
+    socket.emit("openMsgBar", id, oldid, localStorage.getItem("id"))
     localStorage.setItem(`Msgid`, id)
 }
 
+const renderName = async (id) => {
+    const data = await fetch(`http://127.0.0.1:3000/user?id=${id}`, {
+        method: "GET"
+    }).catch(err => {console.log(err)})
+    const returnData = await data.json()
+    let name = returnData.msg.name
+    elements.HeaderName.innerText = name
+    elements.HeaderName.classList.remove("no_visible")
+    socket.emit("openMsgBar", id, oldId, localStorage.getItem("id"))
+    localStorage.setItem(`Msgid`, id)
+}
 
 export const removeMsgH = () => {
     while(elements.msg_main_div.firstChild){
@@ -19,6 +32,8 @@ export const removeMsgH = () => {
     }
 }
 
+export const renderMSG = async (id, reciveid) => {
+    const data = await fetch(`http://127.0.0.1:3000/MSG?sender=${id}&reciver=${reciveid}`, {
 const renderName = async (id) => {
     const data = await fetch(`https://smash-api1.herokuapp.com/user?id=${id}`, {
         method: "GET"

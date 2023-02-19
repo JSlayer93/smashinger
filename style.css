@@ -75,16 +75,22 @@
     background: #555; 
 }
 .FriendProfile{
+    text-decoration: none;
+    color: black;
     cursor: pointer;
     border-radius: 25vh;
     margin-top: 2.5vh;
     background-color: white;
     height: 12vh;
     display: flex;
-    align-items: center;
     font-size: 2.5vh;
     font-family: 'Roboto Mono', monospace;
     transition: 0.3s;
+}
+.FriendProfileN{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .FriendProfile:hover{
     background-color: rgba(255, 255, 255, 0.74);
@@ -132,6 +138,7 @@
     transition: 0.3s;
     width: 6vh;
 }
+.FriendProfile
 .friendIcon:hover{
     cursor: pointer;
     margin-left: 1vh;

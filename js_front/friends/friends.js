@@ -6,7 +6,7 @@ var ConuntIndex = 0
 
 export const createUser = async (justZ, count) => {
     while(justZ < count && justZ < 5){
-        const data = await fetch(`https://smash-api1.herokuapp.com/users`, {
+        const data = await fetch(`http://127.0.0.1:3000/users`, {
             method: "GET"
         }).catch(err => {console.log(err)})
         const returnData = await data.json()
@@ -15,6 +15,8 @@ export const createUser = async (justZ, count) => {
         
         if(id != localStorage.getItem("id")){
             const User = `
+            <a class="FriendProfile" href="#${id}">
+                <nav class="FriendProfileN">
             <a class="FriendProfile_A" id="FriendProfile" href="#${id}">
                 <nav class="FriendProfile">
                     <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
@@ -29,7 +31,7 @@ export const createUser = async (justZ, count) => {
 }
 
 export const Usercount = async () => {
-    const data = await fetch(`https://smash-api1.herokuapp.com/users`, {
+    const data = await fetch(`http://127.0.0.1:3000/users`, {
         method: "GET"
     }).catch(err => {console.log(err)})
     const returnData = await data.json()

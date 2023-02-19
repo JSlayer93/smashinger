@@ -6,6 +6,8 @@ export const register = async () => {
         method: "GET"
     }).catch(err => {console.log(err)})
     const returnData = await data.json()
+    console.log(returnData)
+    if(returnData.msg){
     if(returnData.msg != "name is used"){
         regSucces(returnData.msg)
     }else{
@@ -18,6 +20,8 @@ export const regSucces = (id) =>{
     localStorage.setItem("Registered", true)
     elements.regIcon.classList.add('no_visible')
     elements.profileIcon.classList.remove('no_visible')
+    localStorage.setItem("id", id)
+    window.location.reload()
 
 
     socket.emit("createUser", elements.reg_name.value.toLowerCase())

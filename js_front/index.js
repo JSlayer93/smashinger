@@ -8,7 +8,7 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
 import { reciveMsg } from "./massages/recivemsg.js"
 import { sendMsg } from "./massages/sendMsg.js"
 
-export const socket = io("https://smash-api1.herokuapp.com")
+export const socket = io("http://127.0.0.1:3000")
 socket.on("connect", () => {
     console.log("server is connected")
 })
@@ -16,6 +16,7 @@ socket.on("connect", () => {
 Notification.requestPermission()
 
 if(localStorage.getItem("Registered")){
+    renderProfile(localStorage.getItem("id"))
     renderProfile(localStorage.getItem(`id`))
 }
 
@@ -50,10 +51,29 @@ elements.msgMenu.addEventListener("submit", function(){
     }
 })
 
+let oldId = ''
+
+if (window.location.hash && localStorage.getItem(`Registered`) && localStorage.getItem(`id`) != window.location.hash.slice(1)) {
+    const hashWithoutSymbol = window.location.hash.slice(1);
+    openMsgBar(hashWithoutSymbol, oldId)
+    oldId = hashWithoutSymbol
+}
+
 reciveMsg()
 
 //FRIENDSC
 Usercount()
+
+var oldname = ""
+
+window.onhashchange = function() {
+  if (window.location.hash && localStorage.getItem(`Registered`) && localStorage.getItem(`Registered`) && localStorage.getItem(`id`) != window.location.hash.slice(1)) {
+    const hashWithoutSymbol = window.location.hash.slice(1);
+    openMsgBar(hashWithoutSymbol, oldId)
+    oldId = hashWithoutSymbol
+  }
+};
+
 
 window.onhashchange = function() {
     if (window.location.hash) {
