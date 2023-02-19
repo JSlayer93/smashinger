@@ -4,9 +4,9 @@ import { createOtherMsg } from "./openMsg.js"
 
 
 export const reciveMsg = () => {
-    socket.on("reciveMsg", (msg, name, hisname) => {
+    socket.on("reciveMsg", (msg, id, hisid) => {
         console.log("recived")
-        if(localStorage.getItem("name") == name && localStorage.getItem("Msgname") == hisname && localStorage.getItem("Msgname")){
+        if(localStorage.getItem("id") == id && localStorage.getItem("Msgid") == hisid && localStorage.getItem("Msgid")){
             createOtherMsg(msg)
         }
     })

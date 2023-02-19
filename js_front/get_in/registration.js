@@ -5,18 +5,19 @@ export const register = async () => {
         method: "GET"
     }).catch(err => {console.log(err)})
     const returnData = await data.json()
-    if(returnData.msg != "name is used"){
-        regSucces()
+    console.log(returnData)
+    if(returnData.msg){
+        regSucces(returnData.msg)
     }else{
         alert("choose another name ბიჭო")
     }
 }
 
-export const regSucces = () =>{
+export const regSucces = (id) =>{
     elements.log_in_or_reg.classList.add("no_visible")
     localStorage.setItem("Registered", true)
     elements.regIcon.classList.add('no_visible')
     elements.profileIcon.classList.remove('no_visible')
-    localStorage.setItem("name", elements.reg_name.value.toLowerCase())
-    location.reload()
+    localStorage.setItem("id", id)
+    window.location.reload()
 }

@@ -8,13 +8,13 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
 import { reciveMsg } from "./massages/recivemsg.js"
 import { sendMsg } from "./massages/sendMsg.js"
 
-export const socket = io("https://smash-api1.herokuapp.com")
+export const socket = io("http://127.0.0.1:3000")
 socket.on("connect", () => {
     console.log("server is connected")
 })
 
 if(localStorage.getItem("Registered")){
-    renderProfile(localStorage.getItem("name"))
+    renderProfile(localStorage.getItem("id"))
 }
 
 if(location.reload){
@@ -22,16 +22,24 @@ if(location.reload){
 }
 
 if(localStorage.getItem("Registered")){
-    socket.emit("join_name_room", localStorage.getItem("name"))
+    socket.emit("join_id_room", localStorage.getItem("id"))
 }
 
 elements.msgMenu.addEventListener("submit", function(){
     event.preventDefault()
-    if(msgText.value != "" && localStorage.getItem("Msgname")){
+    if(msgText.value != "" && localStorage.getItem("Msgid")){
         sendMsg(msgText.value)
         msgText.value = ""
     }
 })
+
+let oldId = ''
+
+if (window.location.hash && localStorage.getItem(`Registered`) && localStorage.getItem(`id`) != window.location.hash.slice(1)) {
+    const hashWithoutSymbol = window.location.hash.slice(1);
+    openMsgBar(hashWithoutSymbol, oldId)
+    oldId = hashWithoutSymbol
+}
 
 reciveMsg()
 
@@ -40,17 +48,13 @@ Usercount()
 
 var oldname = ""
 
-addEventListener("click", e => {
-    if(localStorage.getItem("Registered")){
-        if(e.path[1].className == "FriendProfile"){
-            openMsgBar(e.path[1].childNodes[3].innerText, oldname)
-            oldname = e.path[1].childNodes[3].innerText
-        }else if(e.path[0].className == "FriendProfile"){
-            openMsgBar(e.path[0].innerText, oldname)
-            oldname = e.path[0].innerText
-        }
-    }
-})
+window.onhashchange = function() {
+  if (window.location.hash && localStorage.getItem(`Registered`) && localStorage.getItem(`Registered`) && localStorage.getItem(`id`) != window.location.hash.slice(1)) {
+    const hashWithoutSymbol = window.location.hash.slice(1);
+    openMsgBar(hashWithoutSymbol, oldId)
+    oldId = hashWithoutSymbol
+  }
+};
 
 
 
