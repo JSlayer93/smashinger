@@ -1,4 +1,5 @@
 import { elements } from "../elements/elements.js";
+import { socket } from "../index.js";
 
 var Opener = false
 var ConuntIndex = 0
@@ -16,6 +17,8 @@ export const createUser = async (justZ, count) => {
             const User = `
             <a class="FriendProfile" href="#${id}">
                 <nav class="FriendProfileN">
+            <a class="FriendProfile_A" id="FriendProfile" href="#${id}">
+                <nav class="FriendProfile">
                     <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
                     <p>${name}</p>
                 </nav>
@@ -69,4 +72,17 @@ export const closeOpenFriends = () =>{
             elements.userSec.style.transition = "0.3s"
         }
     }
+}
+
+export const createNewUser = () => {
+    socket.on("createIsReal", name => {
+        const User = `
+        <a class="FriendProfile_A" href="sdad">
+        <nav class="FriendProfile">
+            <img src="https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg" alt="">
+            <p>${name}</p>
+        </nav>
+    </a>`
+        elements.friendsDiv.insertAdjacentHTML('beforeend', User)
+    })
 }

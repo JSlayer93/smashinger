@@ -1,7 +1,7 @@
 import { elements } from "./elements/elements.js"
 import { alreadyIn, closeProfile, log_out, renderProfile, showProfile } from "./profile/profile.js"
 import { register } from "./get_in/registration.js"
-import { closeOpenFriends, createUser, Usercount } from "./friends/friends.js"
+import { closeOpenFriends, createNewUser, createUser, Usercount } from "./friends/friends.js"
 import { log_in } from "./get_in/Log_in.js"
 import { createMainMsg, createOtherMsg, openMsgBar } from "./massages/openMsg.js"
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
@@ -13,8 +13,26 @@ socket.on("connect", () => {
     console.log("server is connected")
 })
 
+Notification.requestPermission()
+
 if(localStorage.getItem("Registered")){
     renderProfile(localStorage.getItem("id"))
+    renderProfile(localStorage.getItem(`id`))
+}
+
+createNewUser()
+
+let currentUrl = window.location.href;
+
+let hashFragment = currentUrl.split("#")[1];
+
+let oldId = ``
+
+if (hashFragment) {
+  openMsgBar(hashFragment, oldId)
+  oldId = hashFragment
+} else {
+  console.log("No hash fragment found");
 }
 
 if(location.reload){
@@ -57,6 +75,15 @@ window.onhashchange = function() {
 };
 
 
+window.onhashchange = function() {
+    if (window.location.hash) {
+      const hashWithoutSymbol = window.location.hash.slice(1);
+      openMsgBar(hashWithoutSymbol, oldId)
+      oldId = hashWithoutSymbol
+    } else {
+      console.log("No hash fragment found");
+    }
+};
 
 elements.regIcon.addEventListener("click", function(){
     elements.log_in_or_reg.classList.remove("no_visible")
