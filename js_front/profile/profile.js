@@ -28,9 +28,4 @@ export const renderProfile = async (id) =>{
         }).catch(err => {console.log(err)})
         const returnData = await data.json()
         elements.ProfileName.innerHTML = returnData.msg.name
-    const data = await fetch(`https://smash-api1.herokuapp.com/user?id=${id}`, {
-            method: "GET"
-        }).catch(err => {console.log(err)})
-    const returnData = await data.json()
-    elements.ProfileName.innerHTML = returnData.msg.name
 }
