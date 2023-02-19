@@ -5,7 +5,7 @@ var ConuntIndex = 0
 
 export const createUser = async (justZ, count) => {
     while(justZ < count && justZ < 5){
-        const data = await fetch(`http://127.0.0.1:3000/users`, {
+        const data = await fetch(`https://smash-api1.herokuapp.com/users`, {
             method: "GET"
         }).catch(err => {console.log(err)})
         const returnData = await data.json()
@@ -28,7 +28,7 @@ export const createUser = async (justZ, count) => {
 }
 
 export const Usercount = async () => {
-    const data = await fetch(`http://127.0.0.1:3000/users`, {
+    const data = await fetch(`https://smash-api1.herokuapp.com/users`, {
         method: "GET"
     }).catch(err => {console.log(err)})
     const returnData = await data.json()

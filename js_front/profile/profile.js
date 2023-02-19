@@ -23,7 +23,7 @@ export const log_out = () =>{
 }
 
 export const renderProfile = async (id) =>{
-    const data = await fetch(`http://127.0.0.1:3000/user?id=${id}`, {
+    const data = await fetch(`https://smash-api1.herokuapp.com/user?id=${id}`, {
             method: "GET"
         }).catch(err => {console.log(err)})
         const returnData = await data.json()
