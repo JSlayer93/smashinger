@@ -4,7 +4,6 @@ import { createMainMsg, createOtherMsg } from "./openMsg.js"
 
 
 export const sendMsg = (text) => {
-    console.log(`saba`)
     socket.emit("sendMsg", text, localStorage.getItem("Msgid"), localStorage.getItem("id"))
     createMainMsg(text)
     socket.emit("MSGrecived", localStorage.getItem("id"), localStorage.getItem("Msgid"), text)
